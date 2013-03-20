@@ -1350,7 +1350,33 @@ void PrimaryExpression() : {}
       MessageExpression() |
       SelectorExpression() |
       ProtocolExpression() |
-      EncodeExpression() )
+      EncodeExpression() |
+	  LiteralExpression() )
+}
+
+void LiteralExpression() : {}
+{
+	"@" ( ( "+" | "-" )? <DECIMAL_CONSTANT> | ArrayLiteral() | DictionaryLiteral() )
+}
+
+void ArrayLiteral() : {}
+{
+	"[" ExpressionList() "]"
+}
+
+void ExpressionList() : {}
+{
+	Expression() ("," Expression())*
+}
+
+void DictionaryLiteral(): {}
+{
+	"{" KeyValueList() "}"
+}
+
+void KeyValueList() : {}
+{
+  KeywordArgument() ("," KeywordArgument())*
 }
 
 void MessageExpression() : {}
